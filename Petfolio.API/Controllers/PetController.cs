@@ -9,11 +9,11 @@ namespace Petfolio.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ProducesResponseType(typeof(ResponseRegisteredPetJson), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ResponseErrorsJson), StatusCodes.Status400BadRequest)]
     public class PetController : ControllerBase
     {
         [HttpPost]
+        [ProducesResponseType(typeof(ResponseRegisteredPetJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorsJson), StatusCodes.Status400BadRequest)]
         public IActionResult Register([FromBody] RequestPetJson request)
         {
             var response = new RegisterPetUseCase().Execute(request);
@@ -41,7 +41,7 @@ namespace Petfolio.API.Controllers
 
             if (response.Pets.Any()) //Any esta verificando se exite algum elemento e retorna true senao retorna false
             {
-                return Ok();
+                return Ok(response);
             }
             return NoContent();
         }
